@@ -1,8 +1,4 @@
 # aes_cfb_crypt
-build for test : 
-
-gcc *.c -O3 -o testCFB -static -Wall
-
 
 unsigned char *key = (unsigned char *)malloc(32);
 
@@ -18,6 +14,12 @@ AES_cfb128_encrypt(random_iv, encrypted_text, 16, (const void *)&aesKey, iv, &nu
 
 AES_cfb128_encrypt(plain_text, encrypted_text + 16, strlen(plain_text), (const void *)&aesKey, random_iv, &num, AES_ENCRYPT);
 
+/
+/
+build for test : 
 
+gcc *.c -O3 -o testCFB -static -Wall
+/
+/
 License : 
 follow OpenSSL 1.1.1
