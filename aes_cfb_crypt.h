@@ -13,6 +13,7 @@ extern "C" {
 
 int randomIV(unsigned char *out);
 int randomIv(unsigned char *out);
+int random_iv(unsigned char *out);
 int sha384_key_iv(char * in, size_t length, unsigned char * key, unsigned char * iv);
 int aes_256_cfb_crypt(const unsigned char *in, unsigned char *out, size_t length, char *strPwd, unsigned char *crypt_iv, int *num, int enc);
 
