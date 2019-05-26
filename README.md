@@ -37,7 +37,14 @@ AES_cfb128_encrypt(encrypted_text, random_iv, 16, (const void *)&aesKey, iv, &nu
 
 AES_cfb128_encrypt(encrypted_text + 16, plain_text, strlen(encrypted_text) - 16, (const void *)&aesKey, random_iv, &num, AES_DECRYPT);
 
-
+我试图通过以下的方式增加安全性：
+通过对用户密码取 sha384
+取到的结果 后16个字节 作为 IV
+前面的32个字节 作为 KEY
+然后取一个16字节的随机数 作为 IV2
+用 KEY和IV2 加密数据
+用 KEY和IV 加密 IV2
+然后把 加密后的IV2 拼接到 加密后的数据 前面
 # --------------------------------------------------------------
 # build : 
 
@@ -53,7 +60,7 @@ gcc *.c -O3 -o cryptFile -static -Wall
 
 android with NDK :
 
-gcc *.c -O3 -o cryptFile -static -Wall
+D:\ndk\android-ndk-r13c\toolchains\arm-linux-androideabi-4.9\prebuilt\windows\bin\arm-linux-androideabi-gcc --sysroot=D:\ndk\android-ndk-r13c\platforms\android-19\arch-arm -o cryptFileAndroid sha512.c cryptFile.c cfb128.c aes_core.c aes_cfb_crypt.c -std=gnu99 -O3  -Wall -pie -fPIE -static
 
 OR call it with jni
 
